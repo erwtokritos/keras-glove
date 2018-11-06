@@ -3,7 +3,7 @@ from collections import defaultdict
 import click
 
 from app.models import glove_model
-from app.k_utils import save_model
+from app.save_utils import save_model
 from app.evaluators import get_most_similar
 from app import text_utils as tu
 
