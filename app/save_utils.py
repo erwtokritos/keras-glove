@@ -9,6 +9,11 @@ from app.config import *
 
 
 def save_model(model: Model, tokenizer: Tokenizer):
+    """
+    Saves the important parts of the model
+    :param model: Keras model to save
+    :param tokenizer: Keras Tokenizer to save
+    """
     for layer in model.layers:
         if '_biases' in layer.name or '_embeddings' in layer.name:
             np.save(file=f'{OUTPUT_FOLDER}{layer.name}', arr=layer.get_weights()[0])
