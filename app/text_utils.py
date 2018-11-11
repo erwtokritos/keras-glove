@@ -8,7 +8,7 @@ import numpy as np
 def read_file(filename, num_lines=0) -> List[str]:
     """
     A simple file reader
-    :param filename: The name of the file
+    :param filename: A file-like object
     :param num_lines: Number of lines to read from the file.
     :return:
     """
