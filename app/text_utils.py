@@ -5,18 +5,18 @@ from keras.preprocessing.text import Tokenizer
 import numpy as np
 
 
-def read_file(filename, num_lines=0) -> List[str]:
+def read_file(file, num_lines=0) -> List[str]:
     """
     A simple file reader
-    :param filename: A file-like object
+    :param file: A file-like object
     :param num_lines: Number of lines to read from the file.
     :return:
     """
     response = []
-    for ix, line in enumerate(filename):
+    for ix, line in enumerate(file):
         response.append(str(line, errors='ignore'))
 
-        if num_lines > 0 and ix > num_lines:
+        if (ix + 1) == num_lines:
             break
     return response
 
