@@ -16,7 +16,6 @@ the interested user should refer to the [original web site](https://nlp.stanford
 
 
 #### Pending
-- Unit tests
 - A new version with less memory requirements. 
 
 
