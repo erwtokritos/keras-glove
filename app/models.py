@@ -52,4 +52,4 @@ def custom_loss(y_true, y_pred):
     :param y_pred: The predicted (log-)co-occurrences from the model
     :return: The loss associated with this batch
     """
-    return K.sum(K.pow(K.clip(y_true / X_MAX, 0.0, 1.0), a) * K.square(y_pred - K.log(y_true)), axis=-1)
+    return K.sum(K.pow(K.clip(y_true / X_MAX, 0.0, 1.0), a) * K.square(y_pred - K.log(1 + y_true)), axis=-1)
