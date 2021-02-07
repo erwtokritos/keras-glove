@@ -38,7 +38,7 @@ Running the code
 ---
 There are three commands. 
 
-The first trains the model on a corpus provided by the user e.g. a Kaggle dataset. The program expects a text item (e.g. tweet, article etc) per line. We train GloVe, with:
+The first command trains the model on a corpus provided by the user, e.g. a Kaggle dataset, where there is a text item (e.g. tweet, article etc) per line. We train GloVe, with:
 ```bash
  kglove train data/<our corpus>.csv -v 20 -e 5 -b 64
 ```
@@ -51,7 +51,7 @@ Other options are:
 
 Take a look at `keras_glove/interface.py` for more info 
 
-The second training command takes advantage of the [dataset collection](https://github.com/huggingface/dataset) provided by 
+The second training command takes advantage of the [dataset collection](https://github.com/huggingface/datasets) provided by 
 the awesome [Huggingface team](https://huggingface.co/). There are additional options (compared to the above)
 which specify the dataset configuration. More specifically:
 
