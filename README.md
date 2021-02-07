@@ -63,7 +63,7 @@ which specify the dataset configuration. More specifically:
  kglove hf-train --hf_ds cnn_dailymail  --hf_split train  --hf_ds_version 3.0.0 --hf_label article -v 30 -e 4
 ```
 
-Both training commands will save the trained model to the `output` folder.
+Both commands will save the trained model to the `output` folder.
 
 * Note: Each run overwrites previous runs 
 
@@ -71,10 +71,13 @@ The third command loads the trained model and returns the closest neighbours for
 For example, training on a small portion of the `cnn_dailymail` dataset as presented above we get:
 
 ```bash
->  kglove closest russia
+>  kglove closest russia,2008
 
 Most similar words to russia:
 [('korea', 0.9835626), ('syria', 0.98309094), ('afghanistan', 0.9797111), ('iraq', 0.9768379), ('ukraine', 0.9753001)]
+
+Most similar words to 2008:
+[('2006', 0.9922105), ('2012', 0.9903844), ('2010', 0.9899334), ('2009', 0.98728645), ('2007', 0.9869324)]
 
 ```
 
@@ -85,9 +88,4 @@ Most similar words to clinton:
 [('romney', 0.98541075), ('bush', 0.97941786), ('president', 0.9757596), ('barack', 0.96643496), ('press', 0.9561945)]
 ```
 
-```bash
-> Most similar words to 2008:
-
-[('2006', 0.9922105), ('2012', 0.9903844), ('2010', 0.9899334), ('2009', 0.98728645), ('2007', 0.9869324)]
-```
-
+There is an extra option `-k` to specify the number of returned items (by default it is 5)

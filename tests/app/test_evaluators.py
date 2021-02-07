@@ -37,8 +37,8 @@ def test_most_similar(mocker):
 
     res = ev.get_most_similar(word='blah', k=2)
     assert len(res) == 2
-    assert res[0] == ('bla', 0.5)
-    assert res[1] == ('blahblah', 0.7)
+    assert res[0] == ('blahblah', 0.7)
+    assert res[1] == ('bla', 0.5)
 
 
 def test_most_uknown_word(mocker):

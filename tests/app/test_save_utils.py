@@ -35,6 +35,7 @@ def test_save_utils(mock_model, mock_tokenizer, mocker):
 
     mock_np_save = mocker.patch('keras_glove.save_utils.np.save')
     mock_pickle_dump = mocker.patch('keras_glove.save_utils.pickle.dump')
+    mock_open = mocker.patch('builtins.open')
     mock_cos_sim = mocker.patch('keras_glove.save_utils.cosine_similarity')
     mock_cos_sim.return_value = np.ones((3, 3)) * 0.25
 
@@ -47,3 +48,4 @@ def test_save_utils(mock_model, mock_tokenizer, mocker):
     su.save_model(model=mock_model, tokenizer=mock_tokenizer)
     assert mock_np_save.call_count == 3
     assert mock_pickle_dump.call_count == 2
+    assert mock_open.call_count == 2
