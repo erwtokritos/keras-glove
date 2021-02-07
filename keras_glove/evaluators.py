@@ -3,7 +3,7 @@ import pickle
 
 import numpy as np
 
-from app.config import *
+from keras_glove.config import *
 
 
 def get_most_similar(word: str, k: int) -> List[Tuple]:
@@ -27,5 +27,5 @@ def get_most_similar(word: str, k: int) -> List[Tuple]:
 
     return [
         (index_to_word[v], corr_matrix[word_index, v])
-        for v in closest
+        for v in closest[::-1]
     ]

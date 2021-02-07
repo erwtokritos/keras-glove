@@ -15,75 +15,79 @@ the interested user should refer to the [original web site](https://nlp.stanford
 2. Helper functions for data loading and transformations 
 
 
-#### Pending
-- A new version with less memory requirements. 
-
-
-
 Setup
 ----
 
-### Datasets
-You need to download a corpus in order to run the algorithm. Some suggestions:
-- http://mattmahoney.net/dc/text8.zip
-- [Project Gutenberg](https://www.gutenberg.org/ebooks/)
-- https://github.com/kavgan/nlp-text-mining-working-examples/blob/master/word2vec/reviews_data.txt.gz
-
-The files should be unzipped and by convention are placed into the `data` folder
-
-
-### Output
-All the generated files are stored in the `output` folder 
-
-
 #### Requirements
-- Python 3.6
-- virtualenv
+- Python 3.8
+- poetry (https://python-poetry.org/)
 
-Start a new virtual environment as:
+
+Create a virtual environment with `poetry`:
 ```bash
-virtualenv --no-site-packages -p python3.6 venv
+poetry install
 ```
 
 and then activate it with
 ```bash
-. venv/bin/activate
+poetry shell
 ```
-
-You can install the library either with
-```bash
-python setup.py install
-```
-
-or 
-```bash
-python setup.py develop
-```
-if you want to stay up to date
 
 
 Running the code
 ---
-Currently there are two commands available. The first performs the actual training based on
-the given corpus. For example, the command:
+There are three commands. 
+
+The first trains the model on a corpus provided by the user e.g. a Kaggle dataset. The program expects a text item (e.g. tweet, article etc) per line. We train GloVe, with:
 ```bash
-kglove train data/my_corpus.txt -n 5000 -v 30 -e 3 -b 4098
+ kglove train data/<our corpus>.csv -v 20 -e 5 -b 64
 ```
-will read the first 5000 lines from `my_corpus.txt`, it will train the model for 3 epochs with batch size 4098 producing 
-30-dimensional vectors. 
-Look in `orchestrator.py` for the different options available
+which will train the model for 5 epochs (`-e` option) with batch size 64 (`-b` option) producing 
+20-dimensional vectors (`-v` option). 
+Other options are:
+- `-n` or `--num-lines`: Number of lines to read from a file. Useful when you want to run a test on a smaller version of the dataset 
+- `-w` or `--window`: The window parameter required by GloVe (by default it is 5)
+- `--num-words` : The number of most frequent words that will form the vocabulary
 
+Take a look at `keras_glove/interface.py` for more info 
 
-The second command returns the closest neighbours for a (comma separated) list of words:
+The second training command takes advantage of the [dataset collection](https://github.com/huggingface/dataset) provided by 
+the awesome [Huggingface team](https://huggingface.co/). There are additional options (compared to the above)
+which specify the dataset configuration. More specifically:
+
+- `--hf_ds`: The dataset to use (e.g. `cnn_dailymail`)
+- `--hf_version`: The version of the dataset (not mandatory)
+- `--hf_split`: The split (e.g. `train`, `validation` etc).
+- `--hf_label`: The label of the text item. Dataset-specific
 ```bash
-kglove closest dirty,polite
+ kglove hf-train --hf_ds cnn_dailymail  --hf_split train  --hf_ds_version 3.0.0 --hf_label article -v 30 -e 4
 ```
-will produce the following output:
+
+Both training commands will save the trained model to the `output` folder.
+
+* Note: Each run overwrites previous runs 
+
+The third command loads the trained model and returns the closest neighbours for a (comma separated) list of input words:
+For example, training on a small portion of the `cnn_dailymail` dataset as presented above we get:
+
 ```bash
-Most similar words to dirty:
-[('laid', 0.9819546), ('smelled', 0.98293394), ('dark', 0.98691344), ('worn', 0.99096316)]:
+>  kglove closest russia
 
-Most similar words to polite:
-[('accomodating', 0.9964925), ('courteous', 0.9968112), ('professional', 0.9969903), ('accommodating', 0.99781287)]:
+Most similar words to russia:
+[('korea', 0.9835626), ('syria', 0.98309094), ('afghanistan', 0.9797111), ('iraq', 0.9768379), ('ukraine', 0.9753001)]
 
 ```
+
+```bash
+>  kglove closest clinton
+
+Most similar words to clinton:
+[('romney', 0.98541075), ('bush', 0.97941786), ('president', 0.9757596), ('barack', 0.96643496), ('press', 0.9561945)]
+```
+
+```bash
+> Most similar words to 2008:
+
+[('2006', 0.9922105), ('2012', 0.9903844), ('2010', 0.9899334), ('2009', 0.98728645), ('2007', 0.9869324)]
+```
+

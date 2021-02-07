@@ -1,6 +1,6 @@
-from keras.models import Model
+from tensorflow.keras.models import Model
 
-import app.models as m
+import keras_glove.models as m
 
 
 def test_glove_model():

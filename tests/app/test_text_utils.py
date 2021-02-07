@@ -2,7 +2,7 @@ from collections import defaultdict
 
 import pytest
 
-import app.text_utils as tu
+import keras_glove.text_utils as tu
 
 
 @pytest.fixture()
@@ -50,7 +50,7 @@ def test_bigram_count():
 
 def test_build_cooccurrences(mocker):
     # mock bigram count
-    mock_bigram_count = mocker.patch('app.text_utils.bigram_count')
+    mock_bigram_count = mocker.patch('keras_glove.text_utils.bigram_count')
 
     # input arguments
     _cache = defaultdict(lambda: defaultdict(int))
