@@ -1,7 +1,7 @@
 from typing import List, Union, Tuple
 from collections import defaultdict
 
-from keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.text import Tokenizer
 import numpy as np
 
 

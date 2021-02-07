@@ -1,11 +1,11 @@
 import pickle
 
-from keras.models import Model
-from keras.preprocessing.text import Tokenizer
+from tensorflow.keras.models import Model
+from tensorflow.keras.preprocessing.text import Tokenizer
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 
-from app.config import *
+from keras_glove.config import *
 
 
 def save_model(model: Model, tokenizer: Tokenizer):

@@ -1,9 +1,9 @@
-from keras.layers import Input, Embedding, Dot, Reshape, Add
-from keras.models import Model
-from keras.optimizers import Adam
-import keras.backend as K
+from tensorflow.keras.layers import Input, Embedding, Dot, Reshape, Add
+from tensorflow.keras.models import Model
+from tensorflow.keras.optimizers import Adam
+import tensorflow.keras.backend as K
 
-from app.config import *
+from keras_glove.config import *
 
 
 X_MAX = 100
