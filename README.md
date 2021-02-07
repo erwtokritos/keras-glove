@@ -38,6 +38,7 @@ Running the code
 ---
 There are three commands. 
 
+
 The first command trains the model on a corpus provided by the user, e.g. a Kaggle dataset, where there is a text item (e.g. tweet, article etc) per line. We train GloVe, with:
 ```bash
  kglove train data/<our corpus>.csv -v 20 -e 5 -b 64
@@ -50,6 +51,8 @@ Other options are:
 - `--num-words` : The number of most frequent words that will form the vocabulary
 
 Take a look at `keras_glove/interface.py` for more info 
+
+---
 
 The second training command takes advantage of the [dataset collection](https://github.com/huggingface/datasets) provided by 
 the awesome [Huggingface team](https://huggingface.co/). There are additional options (compared to the above)
@@ -67,6 +70,8 @@ Both commands will save the trained model to the `output` folder.
 
 * Note: Each run overwrites previous runs 
 
+
+---
 The third command loads the trained model and returns the closest neighbours for a (comma separated) list of input words:
 For example, training on a small portion of the `cnn_dailymail` dataset as presented above we get:
 
